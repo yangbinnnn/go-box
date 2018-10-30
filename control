@@ -1,0 +1,93 @@
+#!/usr/bin/env python
+import os
+import json
+
+def _get_version():
+    for line in open('main.go'):
+        line = line.strip()
+        if not line.startswith('version'):
+            continue
+
+        items = map(lambda x:x.strip(), line.split('='))
+        if len(items) != 2 or items[0] != 'version':
+            continue
+
+        return items[1].strip('"')
+
+
+def _get_name():
+    js = json.loads(open('config.json').read())
+    return js['name']
+
+
+def version():
+    return _get_version()
+
+
+def name():
+    print _get_name()
+
+
+def _run(cmd):
+    print 'running: %s' % cmd
+    code = os.system(cmd)
+    print 'finish: %s' % code
+
+
+def build():
+    cmds = [
+        'mkdir -p dist',
+        'go build -o dist/%s %s' % (_get_name(), os.getcwd()),
+    ]
+    map(_run, cmds)
+
+def pack():
+    build()
+    name = _get_name()
+    version = _get_version()
+    app = os.path.join('dist', name)
+    dist = os.path.join('dist', '%s-%s.tar.gz' % (name, version))
+    files = " ".join([app, 'config.json'])
+
+    cmds = [
+        'tar -zcf %s %s' % (dist, files)
+    ]
+    map(_run, cmds)
+
+    print 'name: %s' % name
+    print 'version: %s' % version
+    print 'pack: %s' %  dist
+
+
+def clean():
+    os.system('rm -rf dist/*')
+
+if __name__ == '__main__':
+    import sys, inspect
+    if len(sys.argv) < 2:
+        print "Usage:"
+        for k, v in sorted(globals().items(), key=lambda item: item[0]):
+            if inspect.isfunction(v) and k[0] != "_":
+                args, __, __, defaults = inspect.getargspec(v)
+                if defaults:
+                    print sys.argv[0], k, str(args[:-len(defaults)])[1:-1].replace(",", ""), \
+                          str(["%s=%s" % (a, b) for a, b in zip(args[-len(defaults):], defaults)])[1:-1].replace(",", "")
+                else:
+                    print sys.argv[0], k, str(v.func_code.co_varnames[:v.func_code.co_argcount])[1:-1].replace(",", "")
+        sys.exit(-1)
+    else:
+        func = eval(sys.argv[1])
+        args = sys.argv[2:]
+        try:
+            r = func(*args)
+        except Exception, e:
+            print "Usage:"
+            print "\t", "python %s" % sys.argv[1], str(func.func_code.co_varnames[:func.func_code.co_argcount])[1:-1].replace(",", "")
+            if func.func_doc:
+                print "\n".join(["\t\t" + line.strip() for line in func.func_doc.strip().split("\n")])
+            print e
+            r = -1
+            import traceback
+            traceback.print_exc()
+        if isinstance(r, int):
+            sys.exit(r)

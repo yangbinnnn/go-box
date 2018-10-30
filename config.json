@@ -1,0 +1,7 @@
+{
+    "name": "go-box",
+    "httpaddr": "0.0.0.0:8000",
+    "webindex": "web/dist/index.html",
+    "webstatic": "web/dist/static",
+    "apiprefix": "/api"
+}
