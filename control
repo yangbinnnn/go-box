@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 import os
+import sys
 import json
+import glob
+
+pkgs = ['api', 'common', 'core']
 
 def _get_version():
     for line in open('main.go'):
@@ -20,12 +24,21 @@ def _get_name():
     return js['name']
 
 
-def version():
-    return _get_version()
+def _get_mod():
+    pwd = os.getcwd()
+    gopath = os.environ.get('GOPATH', '')
+    for path in gopath.split(':'):
+        src = os.path.join(path, 'src/')
+        if not pwd.startswith(src):
+            continue
+        
+        return pwd.replace(src, '', 1)
+    return None
 
-
-def name():
-    print _get_name()
+def _sed(path, old, new):
+    s = open(path).read()
+    s = s.replace(old, new, -1)
+    open(path, 'wb').write(s)
 
 
 def _run(cmd):
@@ -34,12 +47,60 @@ def _run(cmd):
     print 'finish: %s' % code
 
 
+def version():
+    return _get_version()
+
+
+def name():
+    print _get_name()
+
+
+def remodule():
+    if os.environ.get('GO111MODULE', '') != 'on':
+        print 'GO111MODULE not on.'
+        return
+
+    if not os.path.exists('go.mod'):
+        print 'go.mod not found.'
+        return
+
+    oldmod = open('go.mod').readline().split()[1].strip()
+    newmod = _get_mod()
+    if newmod is None:
+        print 'outside GOPATH, can not remodule.'
+        return
+
+    if oldmod == newmod:
+        print 'It is already %s, nothing to do.' % newmod
+        return
+    
+    oldpkgs = map(lambda pkg: oldmod + '/' + pkg, pkgs)
+    newpkgs = map(lambda pkg: newmod + '/' + pkg, pkgs)
+
+    o_n = zip(oldpkgs, newpkgs)
+
+    allgo = ['main.go']
+    for pkg in pkgs:
+        gos = glob.glob('%s/*.go' % pkg)
+        for go in gos:
+            allgo.append(go)
+
+    for go in allgo:
+        for old, new in o_n:
+            _sed(go, old, new)
+
+    _sed('go.mod', oldmod, newmod)
+    print 'Done %s -> %s.' % (oldmod, newmod)
+
+
 def build():
     cmds = [
         'mkdir -p dist',
         'go build -o dist/%s %s' % (_get_name(), os.getcwd()),
     ]
     map(_run, cmds)
+    print 'Done'
+
 
 def pack():
     build()
@@ -61,6 +122,7 @@ def pack():
 
 def clean():
     os.system('rm -rf dist/*')
+
 
 if __name__ == '__main__':
     import sys, inspect
