@@ -6,6 +6,7 @@ import (
 	"go-box/api"
 	"go-box/common"
 	"go-box/core"
+	"go-box/db"
 	"os"
 
 	"github.com/labstack/echo"
@@ -45,6 +46,9 @@ func main() {
 
 	// config
 	common.InitConfig(cfgpath)
+
+	// db
+	db.InitDB()
 
 	// core
 	core.InitCore()

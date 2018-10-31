@@ -48,4 +48,6 @@ func InitApi() {
 	srv := e.Group(config.APIPrefix)
 	srv.GET("/ping", ping)
 	srv.GET("/add", add)
+	srv.POST("/userRegister", userRegister)
+	srv.GET("/userInfo", userInfo)
 }

@@ -3,5 +3,7 @@
     "httpaddr": "0.0.0.0:8000",
     "webindex": "web/dist/index.html",
     "webstatic": "web/dist/static",
-    "apiprefix": "/api"
+    "apiprefix": "/api",
+    "mongouri": "mongodb://user:password@mongo_host:mongo_port/go-box",
+    "mongoname": "go-box"
 }

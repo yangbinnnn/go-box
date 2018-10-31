@@ -11,6 +11,8 @@ type Config struct {
 	WebIndex  string `json:"webindex"`
 	WebStatic string `json:"webstatic"`
 	APIPrefix string `json:"apiprefix"`
+	MongoURI  string `json:"mongouri"`
+	MongoName string `json:"mongoname"`
 }
 
 var GlobalConfig *Config
