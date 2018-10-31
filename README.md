@@ -58,6 +58,19 @@ control            - 帮助脚本
 - `/api/xxx` 业务 api
 
 
+## Docker
+
+- 编译
+```
+docker build . -t go-box
+```
+
+- 运行
+```
+docker run -p 8000:8000 -v $(pwd)/config.json:/srv/config.json go-box
+```
+
+
 ## 其他
 
 - websocket 推送，直接使用`common.WSBroadcast(msg)` 即可，可以推送给所有连接的客户端
@@ -71,7 +84,7 @@ control            - 帮助脚本
 
 ## TODO
 
-- [ ] Dockerfile
+- [x] Dockerfile
 - [x] 数据库: mongodb
 - [ ] 数据库: redis
 - [x] Websocket
