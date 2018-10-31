@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go-box/api"
 	"go-box/common"
+	"go-box/core"
 	"os"
 
 	"github.com/labstack/echo"
@@ -45,8 +46,14 @@ func main() {
 	// config
 	common.InitConfig(cfgpath)
 
+	// core
+	core.InitCore()
+
 	// api
 	api.InitApi()
+
+	// ws
+	common.InitWS()
 
 	// this will block forever
 	api.StartAPP()

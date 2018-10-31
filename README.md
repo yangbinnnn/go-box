@@ -29,6 +29,7 @@ control            - 帮助脚本
 7. 访问站点，默认`http://127.0.0.1:8000`，如果页面正常显示，说明工程构建成功
 8. 打包发布，`./control pack`
 
+
 ## POWERD BY
 
 - [echo](https://echo.labstack.com/) 
@@ -38,6 +39,7 @@ control            - 帮助脚本
 ## TODO
 - [ ] Dockerfile
 - [ ] 数据库: mongodb，redis
+- [x] Websocket
 - [ ] 文件存储: 本地磁盘，对象存储
 - [ ] 接口权限验证
 - [ ] 定时任务

@@ -32,12 +32,17 @@ func InitApi() {
 	e.Logger.SetLevel(log.DEBUG)
 
 	// middlewares
+	e.Use(middleware.RequestID())
+	e.Use(middleware.Recover())
 	e.Use(middleware.CORS())
 	e.Use(middleware.LoggerWithConfig(logconfig))
 
 	// web
 	e.File("/", config.WebIndex)
 	e.Static("/static", config.WebStatic)
+
+	// ws
+	e.GET("/ws", common.WSRegistry)
 
 	// api
 	srv := e.Group(config.APIPrefix)

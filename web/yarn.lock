@@ -6848,6 +6848,11 @@ vue-loader@^13.3.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-native-websocket@^2.0.12:
+  version "2.0.12"
+  resolved "http://registry.npm.taobao.org/vue-native-websocket/download/vue-native-websocket-2.0.12.tgz#a60d424d28b277a47702a6f874785407f6a884ef"
+  integrity sha1-pg1CTSiyd6R3Aqb4dHhUB/aohO8=
+
 vue-router@^3.0.1:
   version "3.0.1"
   resolved "http://registry.npm.taobao.org/vue-router/download/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"

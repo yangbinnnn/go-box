@@ -1,5 +1,6 @@
 package core
 
-func Add(a, b int) int {
-	return a + b
+func InitCore() {
+	// init your bussiness here
+	go MSGLoop()
 }

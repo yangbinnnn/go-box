@@ -2,6 +2,8 @@
   <div class="main">
     <h1> {{ msg }} </h1>
     <p>Ping response: {{ resp }}</p>
+    <p v-if="isConnected">We're connected to the ws server!</p>
+    <p>WebSocket Message from server: {{ socketMessage }}</p>
   </div>
 </template>
 
@@ -12,7 +14,9 @@ export default {
   data () {
     return {
       msg: 'go-box web',
-      resp: '...'
+      resp: 'waiting...',
+      socketMessage: 'waiting...',
+      isConnected: false
     }
   },
   mounted () {
@@ -24,13 +28,24 @@ export default {
         this.resp = response.data
       )).catch(error => console.log(error))
     }
+  },
+  sockets: {
+    onopen () {
+      this.isConnected = true
+    },
+    onclose () {
+      this.isConnected = false
+    },
+    onmessage (msg) {
+      this.socketMessage = msg.data
+    }
   }
 }
 </script>
 
 <style scoped>
   .main {
-    width: 480px;
+    width: 960px;
     margin: 0 auto;
   }
 </style>
