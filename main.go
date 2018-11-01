@@ -7,6 +7,7 @@ import (
 	"go-box/common"
 	"go-box/core"
 	"go-box/db"
+	"go-box/file"
 	"os"
 
 	"github.com/labstack/echo"
@@ -49,6 +50,9 @@ func main() {
 
 	// db
 	db.InitDB()
+
+	// file
+	file.InitFile()
 
 	// core
 	core.InitCore()

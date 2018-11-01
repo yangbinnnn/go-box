@@ -10,13 +10,13 @@ import (
 func TestFileLocal(t *testing.T) {
 	f := file.NewLocal("/tmp")
 	input := strings.NewReader("hello world")
-	pn, err := f.Put("a.txt", input)
+	pn, err := f.Put("/x/a.txt", input)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log("put bytes num:", pn)
 
-	gn, err := f.Get("a.txt", os.Stdout)
+	gn, err := f.Get("/x/a.txt", os.Stdout)
 	if err != nil {
 		t.Error(err)
 	}
@@ -24,5 +24,14 @@ func TestFileLocal(t *testing.T) {
 
 	if gn != pn {
 		t.Error("lose some things")
+	}
+
+	size, err := f.Size("/x/a.txt")
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log("file size:", size)
+	if gn != size {
+		t.Error("error file size")
 	}
 }

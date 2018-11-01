@@ -52,7 +52,7 @@ export default {
       )).catch(error => console.log(error))
     },
     register () {
-      axios.post('/api/userRegister', {
+      axios.post('/api/user/register', {
         'email': this.email,
         'name': this.name
       }).then(response => {
@@ -63,7 +63,7 @@ export default {
       ))
     },
     userInfo (email) {
-      axios.get('/api/userInfo?email=' + email)
+      axios.get('/api/user/info?email=' + email)
         .then(response => {
           this.name = response.data.name
           this.email = response.data.email

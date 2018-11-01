@@ -146,5 +146,8 @@ func WSRegistry(c echo.Context) error {
 }
 
 func WSBroadcast(msg []byte) {
+	if len(hub.clients) == 0 {
+		return
+	}
 	hub.broadcast <- msg
 }

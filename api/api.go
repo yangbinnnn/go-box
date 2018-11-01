@@ -47,7 +47,18 @@ func InitApi() {
 	// api
 	srv := e.Group(config.APIPrefix)
 	srv.GET("/ping", ping)
-	srv.GET("/add", add)
-	srv.POST("/userRegister", userRegister)
-	srv.GET("/userInfo", userInfo)
+
+	// api math
+	math := srv.Group("/math")
+	math.GET("/add", add)
+
+	// api user
+	user := srv.Group("/user")
+	user.POST("/register", userRegister)
+	user.GET("/info", userInfo)
+
+	// api file
+	file := srv.Group("/file")
+	file.GET("/:name", download)
+	file.PUT("/:name", upload)
 }

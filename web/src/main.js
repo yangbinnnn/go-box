@@ -7,7 +7,7 @@ import VueWebsocket from 'vue-native-websocket'
 
 Vue.config.productionTip = false
 
-Vue.use(VueWebsocket, 'ws://127.0.0.1:8000/ws', {reconnection: true})
+Vue.use(VueWebsocket, `//${window.location.host}/ws`, {reconnection: true})
 
 /* eslint-disable no-new */
 new Vue({
