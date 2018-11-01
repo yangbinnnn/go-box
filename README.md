@@ -49,6 +49,8 @@ control            - 帮助脚本
 - 工程入口
 > `main.go` 为整个工程的入口，主要负责初始化各个模块，建议不要在其中实现复杂的业务逻辑
 
+- 生成接口文档
+> 需要执行`npm install apidoc -g` 安装`apidoc`。`apidoc` 为注释型文档生成工具，支持N 种语言，语法参考 [apidoc](http://apidocjs.com) `执行`./control apidoc` 生成文档
 
 ## 默认路由
 
@@ -56,6 +58,7 @@ control            - 帮助脚本
 - `/static` 前端静态资源
 - `/ws` websocket api
 - `/api/xxx` 业务 api
+- `/docs/` api 接口文档，默认只在DEBUG 模式下开启
 
 
 ## Docker
@@ -81,6 +84,7 @@ docker run -p 8000:8000 -v $(pwd)/config.json:/srv/config.json go-box
 - [echo](https://echo.labstack.com/) 
 - [vue](https://vuejs.org/) 
 - [docker](https://www.docker.com/get-started)
+- [apidoc](http://apidocjs.com)
 
 ## TODO
 
@@ -88,6 +92,7 @@ docker run -p 8000:8000 -v $(pwd)/config.json:/srv/config.json go-box
 - [x] 数据库: mongodb
 - [ ] 数据库: redis
 - [x] Websocket
-- [ ] 文件存储: 本地磁盘，对象存储
+- [x] 小文件存储: 本地磁盘
+- [ ] 小文件存储: 对象存储
 - [ ] 接口权限验证
 - [ ] 定时任务

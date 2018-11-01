@@ -1,0 +1,6 @@
+{
+    "name": "go-box",
+    "version": "0.1.0",
+    "description": "An small bootstrap box for golang HTTP project",
+    "title": "go-box"
+  }

@@ -132,6 +132,15 @@ def clean():
     os.system('rm -rf dist/*')
 
 
+def apidoc():
+    cmds = [
+        'apidoc -i api/ -o docs/'
+    ]
+
+    map(_run, cmds)
+    print 'Done'
+
+
 if __name__ == '__main__':
     import sys, inspect
     if len(sys.argv) < 2:

@@ -1,9 +1,13 @@
 {
+    "debug": true,
     "name": "go-box",
     "httpaddr": "0.0.0.0:8000",
     "webindex": "web/dist/index.html",
     "webstatic": "web/dist/static",
+    "docstatic": "docs",
     "apiprefix": "/api",
     "mongouri": "mongodb://user:password@mongo_host:mongo_port/go-box",
-    "mongoname": "go-box"
+    "mongoname": "go-box",
+    "filestoretype": "local",
+    "localfilehome": "/tmp"
 }

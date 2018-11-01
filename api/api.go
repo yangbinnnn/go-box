@@ -41,6 +41,11 @@ func InitApi() {
 	e.File("/", config.WebIndex)
 	e.Static("/static", config.WebStatic)
 
+	// docs
+	if config.Debug {
+		e.Static("/docs", config.DocStatic)
+	}
+
 	// ws
 	e.GET("/ws", common.WSRegistry)
 

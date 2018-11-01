@@ -6,10 +6,12 @@ import (
 )
 
 type Config struct {
+	Debug         bool   `json:"debug"`
 	LogPath       string `json:"logpath"`
 	HTTPAddr      string `json:"httpaddr"`
 	WebIndex      string `json:"webindex"`
 	WebStatic     string `json:"webstatic"`
+	DocStatic     string `json:"docstatic"`
 	APIPrefix     string `json:"apiprefix"`
 	MongoURI      string `json:"mongouri"`
 	MongoName     string `json:"mongoname"`
