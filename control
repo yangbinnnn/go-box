@@ -4,7 +4,7 @@ import sys
 import json
 import glob
 
-pkgs = ['api', 'common', 'core']
+pkgs = ['api', 'common', 'core', 'db', 'file', 'test']
 
 def _get_version():
     for line in open('main.go'):
