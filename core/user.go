@@ -3,7 +3,7 @@ package core
 import (
 	"errors"
 	"go-box/common"
-	"time"
+	"go-box/db"
 )
 
 var (
@@ -12,19 +12,16 @@ var (
 )
 
 func UserRegister(email, name string) error {
-	n, _ := UserTable.FindId(email).Count()
-	if n != 0 {
+	u, _ := UserInfo(email)
+	if u != nil {
 		return ErrUserExists
 	}
 
-	u := &common.User{Email: email, Name: name, RegisterTime: time.Now()}
-	return UserTable.Insert(u)
+	return db.AddUser(email, name)
 }
 
 func UserInfo(email string) (*common.User, error) {
-	u := new(common.User)
-
-	err := UserTable.FindId(email).One(u)
+	u, err := db.GetUser(email)
 	if err != nil {
 		return nil, ErrUserNotFound
 	}

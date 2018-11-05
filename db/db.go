@@ -13,6 +13,9 @@ var (
 func InitDB() {
 	// mongod
 	initMGO()
+
+	// table
+	initTable()
 }
 
 func initMGO() {
@@ -24,4 +27,8 @@ func initMGO() {
 
 	db := config.MongoName
 	MgoDB = session.DB(db)
+}
+
+func initTable() {
+	UserTable = MgoDB.C("User")
 }
