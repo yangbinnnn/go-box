@@ -1,10 +1,21 @@
 # github.com/dgrijalva/jwt-go v3.2.0+incompatible
 github.com/dgrijalva/jwt-go
-# github.com/globalsign/mgo v0.0.0-20180615134936-113d3961e731
+# github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
+github.com/globalsign/mgo
 github.com/globalsign/mgo/bson
+github.com/globalsign/mgo/internal/sasl
+github.com/globalsign/mgo/internal/scram
 github.com/globalsign/mgo/internal/json
 # github.com/gorilla/websocket v1.4.0
 github.com/gorilla/websocket
+# github.com/hashicorp/consul v1.3.0
+github.com/hashicorp/consul/api
+# github.com/hashicorp/go-cleanhttp v0.5.0
+github.com/hashicorp/go-cleanhttp
+# github.com/hashicorp/go-rootcerts v0.0.0-20160503143440-6bb64b370b90
+github.com/hashicorp/go-rootcerts
+# github.com/hashicorp/serf v0.8.1
+github.com/hashicorp/serf/coordinate
 # github.com/labstack/echo v3.2.1+incompatible
 github.com/labstack/echo
 github.com/labstack/echo/middleware
@@ -17,6 +28,12 @@ github.com/labstack/gommon/random
 github.com/mattn/go-colorable
 # github.com/mattn/go-isatty v0.0.4
 github.com/mattn/go-isatty
+# github.com/mitchellh/go-homedir v1.0.0
+github.com/mitchellh/go-homedir
+# github.com/mitchellh/mapstructure v1.1.2
+github.com/mitchellh/mapstructure
+# github.com/segmentio/ksuid v1.0.2
+github.com/segmentio/ksuid
 # github.com/valyala/bytebufferpool v1.0.0
 github.com/valyala/bytebufferpool
 # github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4

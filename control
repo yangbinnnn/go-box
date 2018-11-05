@@ -3,8 +3,12 @@ import os
 import sys
 import json
 import glob
+import platform
 
-pkgs = ['api', 'common', 'core', 'db', 'file', 'test']
+pkgs = ['api', 'common', 'core', 'file', 'db', 'test']
+
+def _is_macos():
+    return platform.system() == 'Darwin'
 
 def _get_version():
     for line in open('main.go'):
@@ -94,9 +98,15 @@ def remodule():
 
 
 def build():
+    if _is_macos():
+        os.environ.update({
+            "CGO_ENABLED": "0",
+            "GOOS": "linux",
+            "GOARCH": "amd64"
+        })
     cmds = [
         'mkdir -p dist',
-        'go build -o dist/%s %s' % (_get_name(), os.getcwd()),
+        'go build -ldflags \'-extldflags "-static"\' -o dist/%s %s' % (_get_name(), os.getcwd()),
     ]
     map(_run, cmds)
     print 'Done'
@@ -117,6 +127,24 @@ def pack():
     app = os.path.join('dist', name)
     dist = os.path.join('dist', '%s-%s.tar.gz' % (name, version))
     files = " ".join([app, 'config.json'])
+
+    cmds = [
+        'tar -zcf %s %s' % (dist, files)
+    ]
+    map(_run, cmds)
+
+    print 'name: %s' % name
+    print 'version: %s' % version
+    print 'pack: %s' %  dist
+
+
+def packall():
+    build()
+    name = _get_name()
+    version = _get_version()
+    app = os.path.join('dist', name)
+    dist = os.path.join('dist', '%s-%s.tar.gz' % (name, version))
+    files = " ".join([app, 'config.json', 'docs', 'web/dist'])
 
     cmds = [
         'tar -zcf %s %s' % (dist, files)

@@ -31,6 +31,8 @@ control            - 帮助脚本
 7. 编译web，`cd web && yarn install && npm run build`
 7. 访问站点，默认`http://127.0.0.1:8000`，如果页面正常显示，说明工程构建成功
 8. 打包发布，`./control pack`
+9. 打包所有，`./control apidoc && ./control buildweb && ./control packall`
+
 
 ## 开发指南
 
@@ -95,4 +97,7 @@ docker run -p 8000:8000 -v $(pwd)/config.json:/srv/config.json go-box
 - [x] 小文件存储: 本地磁盘
 - [ ] 小文件存储: 对象存储
 - [ ] 接口权限验证
-- [ ] 定时任务
+- [ ] 定时任务管理
+- [ ] micro - gRPC for inter-service communication
+- [ ] micro - Jaeger for request tracing
+- [ ] micro - Consul for service discovery
