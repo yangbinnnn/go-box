@@ -31,7 +31,7 @@ def _get_mod():
         src = os.path.join(path, 'src/')
         if not pwd.startswith(src):
             continue
-        
+
         return pwd.replace(src, '', 1)
     raise Exception('mod not found, check your GOPATH')
 
@@ -92,7 +92,7 @@ def remodule():
     if oldmod == newmod:
         print 'It is already %s, nothing to do.' % newmod
         return
-    
+
     oldpkgs = map(lambda pkg: oldmod + '/' + pkg, pkgs)
     newpkgs = map(lambda pkg: newmod + '/' + pkg, pkgs)
 
@@ -115,7 +115,7 @@ def remodule():
 def build():
     cmds = [
         'mkdir -p dist',
-        'go build -ldflags "%s" -o dist/%s %s' % (ldflags, _get_name(), os.getcwd()),
+        'go build -mod=vendor -ldflags "%s" -o dist/%s %s' % (ldflags, _get_name(), os.getcwd()),
     ]
     map(_run, cmds)
     print 'Done'
