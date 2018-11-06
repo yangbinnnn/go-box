@@ -3,9 +3,38 @@ import os
 import sys
 import json
 import glob
+import time
 import platform
 
+
 pkgs = ['api', 'common', 'core', 'file', 'db', 'test']
+
+# linux.amd64 only
+os.environ.update({
+    "CGO_ENABLED": "0",
+    "GOOS": "linux",
+    "GOARCH": "amd64"
+})
+
+# auto gen build details
+date = time.strftime('%Y%m%d', time.localtime())
+head = os.popen('git rev-parse HEAD').read()
+ldflags = " ".join([
+    '-extldflags -static',
+    '-X main.BuildDate=%s' %  date,
+    '-X main.BuildGitHash=%s' % head
+])
+
+def _get_mod():
+    pwd = os.getcwd()
+    gopath = os.environ.get('GOPATH', '')
+    for path in gopath.split(':'):
+        src = os.path.join(path, 'src/')
+        if not pwd.startswith(src):
+            continue
+        
+        return pwd.replace(src, '', 1)
+    raise Exception('mod not found, check your GOPATH')
 
 def _is_macos():
     return platform.system() == 'Darwin'
@@ -27,18 +56,6 @@ def _get_name():
     js = json.loads(open('config.json').read())
     return js['name']
 
-
-def _get_mod():
-    pwd = os.getcwd()
-    gopath = os.environ.get('GOPATH', '')
-    for path in gopath.split(':'):
-        src = os.path.join(path, 'src/')
-        if not pwd.startswith(src):
-            continue
-        
-        return pwd.replace(src, '', 1)
-    return None
-
 def _sed(path, old, new):
     s = open(path).read()
     s = s.replace(old, new, -1)
@@ -49,7 +66,6 @@ def _run(cmd):
     print 'running: %s' % cmd
     code = os.system(cmd)
     print 'finish: %s' % code
-
 
 def version():
     return _get_version()
@@ -98,15 +114,9 @@ def remodule():
 
 
 def build():
-    if _is_macos():
-        os.environ.update({
-            "CGO_ENABLED": "0",
-            "GOOS": "linux",
-            "GOARCH": "amd64"
-        })
     cmds = [
         'mkdir -p dist',
-        'go build -ldflags \'-extldflags "-static"\' -o dist/%s %s' % (_get_name(), os.getcwd()),
+        'go build -ldflags "%s" -o dist/%s %s' % (ldflags, _get_name(), os.getcwd()),
     ]
     map(_run, cmds)
     print 'Done'
@@ -167,6 +177,13 @@ def apidoc():
 
     map(_run, cmds)
     print 'Done'
+
+def info():
+    print date
+    print head
+    print ldflags
+    print _get_mod()
+
 
 
 if __name__ == '__main__':

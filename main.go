@@ -18,6 +18,10 @@ const (
 )
 
 var (
+	// Build information should only be set by -ldflags.
+	BuildDate    string
+	BuildGitHash string
+
 	h       bool
 	v       bool
 	cfgpath string
@@ -31,7 +35,11 @@ func cmd() {
 	flag.Parse()
 
 	if v {
-		fmt.Println(version)
+		fmt.Println("Version:", version)
+		if len(BuildDate) > 0 {
+			fmt.Println("BuildDate:", BuildDate)
+			fmt.Println("BuildGitHash:", BuildGitHash)
+		}
 		os.Exit(0)
 	}
 
