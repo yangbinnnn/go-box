@@ -4,7 +4,6 @@ import sys
 import json
 import glob
 import time
-import platform
 
 
 pkgs = ['api', 'common', 'core', 'file', 'db', 'test']
@@ -36,8 +35,6 @@ def _get_mod():
         return pwd.replace(src, '', 1)
     raise Exception('mod not found, check your GOPATH')
 
-def _is_macos():
-    return platform.system() == 'Darwin'
 
 def _get_version():
     for line in open('main.go'):
@@ -56,6 +53,7 @@ def _get_name():
     js = json.loads(open('config.json').read())
     return js['name']
 
+
 def _sed(path, old, new):
     s = open(path).read()
     s = s.replace(old, new, -1)
@@ -66,6 +64,7 @@ def _run(cmd):
     print 'running: %s' % cmd
     code = os.system(cmd)
     print 'finish: %s' % code
+
 
 def version():
     return _get_version()
@@ -177,13 +176,6 @@ def apidoc():
 
     map(_run, cmds)
     print 'Done'
-
-def info():
-    print date
-    print head
-    print ldflags
-    print _get_mod()
-
 
 
 if __name__ == '__main__':
