@@ -6,7 +6,7 @@
     "webstatic": "web/dist/static",
     "docstatic": "docs",
     "apiprefix": "/api",
-    "mongouri": "mongodb://user:password@mongo_host:mongo_port/go-box",
+    "mongouri": "mongodb://db:27017/go-box",
     "mongoname": "go-box",
     "filestoretype": "local",
     "localfilehome": "/tmp"

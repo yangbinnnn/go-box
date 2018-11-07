@@ -23,5 +23,5 @@ ARG appname
 
 WORKDIR /srv
 COPY --from=builder0 /go/src/$appname/dist/app .
-COPY --from=builder1 /root/dist web
+COPY --from=builder1 /root/dist web/dist
 ENTRYPOINT ["/srv/app", "-c", "config.json"]

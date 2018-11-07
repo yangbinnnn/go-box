@@ -2,6 +2,13 @@
 
 An small bootstrap box for golang HTTP project
 
+## 快速体验
+> 确保已安装docker，docker-compose
+
+1. docker-compose build
+2. docker-compose up
+3. open http://127.0.0.1:8000
+
 ## layout
 
 ```
@@ -56,6 +63,7 @@ control            - 帮助脚本
 
 - 生成接口文档
 > 需要执行`npm install apidoc -g` 安装`apidoc`。`apidoc` 为注释型文档生成工具，支持N 种语言，语法参考 [apidoc](http://apidocjs.com) `执行`./control apidoc` 生成文档
+
 
 ## 默认路由
 
