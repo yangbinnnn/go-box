@@ -19,6 +19,7 @@ core/              - 业务逻辑
 common/            - 通用全局代码
 db/                - 数据库
 file/              - 文件存储
+micro/             - 微服务相关
 test/              - 测试目录
 web/               - 前端资源
 
