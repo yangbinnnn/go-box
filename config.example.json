@@ -2,6 +2,8 @@
     "debug": true,
     "name": "go-box",
     "httpaddr": "0.0.0.0:8000",
+    "grpcaddr": "0.0.0.0:8001",
+    "grpcenable": true,
     "webindex": "web/dist/index.html",
     "webstatic": "web/dist/static",
     "docstatic": "docs",

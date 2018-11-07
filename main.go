@@ -8,6 +8,7 @@ import (
 	"go-box/core"
 	"go-box/db"
 	"go-box/file"
+	"go-box/micro"
 	"os"
 
 	"github.com/labstack/echo"
@@ -70,6 +71,12 @@ func main() {
 
 	// ws
 	common.InitWS()
+
+	// grpc
+	config := common.GlobalConfig
+	if config.GrpcEnable {
+		micro.RunGrpc(config.GrpcAddr)
+	}
 
 	// this will block forever
 	api.StartAPP()

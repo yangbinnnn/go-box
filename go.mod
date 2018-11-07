@@ -1,6 +1,7 @@
 module go-box
 
 require (
+	cloud.google.com/go v0.32.0 // indirect
 	github.com/DataDog/datadog-go v0.0.0-20180822151419-281ae9f2d895 // indirect
 	github.com/NYTimes/gziphandler v1.0.1 // indirect
 	github.com/armon/circbuf v0.0.0-20150827004946-bbbad097214e // indirect
@@ -14,8 +15,11 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/elazarl/go-bindata-assetfs v1.0.0 // indirect
 	github.com/envoyproxy/go-control-plane v0.6.1 // indirect
+	github.com/fullstorydev/grpcurl v1.0.0 // indirect
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
 	github.com/gogo/googleapis v1.1.0 // indirect
+	github.com/golang/lint v0.0.0-20181026193005-c67002cb31c3 // indirect
+	github.com/golang/protobuf v1.2.0
 	github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db // indirect
 	github.com/gorilla/websocket v1.4.0
 	github.com/hashicorp/consul v1.3.0
@@ -40,6 +44,7 @@ require (
 	github.com/hashicorp/serf v0.8.1 // indirect
 	github.com/hashicorp/vault v0.11.4 // indirect
 	github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d // indirect
+	github.com/jhump/protoreflect v1.1.0 // indirect
 	github.com/kr/text v0.1.0 // indirect
 	github.com/labstack/echo v3.2.1+incompatible
 	github.com/labstack/gommon v0.2.7
@@ -66,7 +71,13 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4 // indirect
 	golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16 // indirect
-	golang.org/x/net v0.0.0-20181101160248-e11730110bbd // indirect
-	golang.org/x/sys v0.0.0-20181030150119-7e31e0c00fa0 // indirect
-	google.golang.org/grpc v1.16.0 // indirect
+	golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3 // indirect
+	golang.org/x/net v0.0.0-20181107093936-a544f70c90f1
+	golang.org/x/oauth2 v0.0.0-20181106182150-f42d05182288 // indirect
+	golang.org/x/sys v0.0.0-20181106135930-3a76605856fd // indirect
+	golang.org/x/tools v0.0.0-20181106213628-e21233ffa6c3 // indirect
+	google.golang.org/appengine v1.3.0 // indirect
+	google.golang.org/genproto v0.0.0-20181101192439-c830210a61df // indirect
+	google.golang.org/grpc v1.16.0
+	honnef.co/go/tools v0.0.0-20180920025451-e3ad64cb4ed3 // indirect
 )

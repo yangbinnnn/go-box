@@ -9,6 +9,8 @@ type Config struct {
 	Debug         bool   `json:"debug"`
 	LogPath       string `json:"logpath"`
 	HTTPAddr      string `json:"httpaddr"`
+	GrpcAddr      string `json:"grpcaddr"`
+	GrpcEnable    bool   `json:"grpcenable"`
 	WebIndex      string `json:"webindex"`
 	WebStatic     string `json:"webstatic"`
 	DocStatic     string `json:"docstatic"`
