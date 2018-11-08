@@ -4,6 +4,7 @@ import (
 	"go-box/common"
 	"go-box/core"
 	"net/http"
+	"time"
 
 	"github.com/labstack/echo"
 )
@@ -15,33 +16,48 @@ func userRegister(c echo.Context) error {
 	}
 
 	if u.Email == "" || u.Name == "" {
-		return c.JSON(http.StatusBadRequest, map[string]interface{}{
-			"errmsg": "email or name missing",
-		})
+		return BadRequest(c, "email or name missing")
 	}
 
 	if err := core.UserRegister(u.Email, u.Name); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]interface{}{
-			"errmsg": err.Error(),
-		})
+		return BadRequest(c, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"state": "OK",
-	})
+	return OKRequest(c)
 }
 
 func userInfo(c echo.Context) error {
-	email := c.QueryParam("email")
+	email := c.Get("uid").(string)
 	if email == "" {
-		return c.JSON(http.StatusBadRequest, nil)
+		return BadRequest(c, "user not login")
 	}
 
 	u, err := core.UserInfo(email)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]interface{}{
-			"errmsg": err.Error(),
-		})
+		return BadRequest(c, err.Error())
 	}
-	return c.JSON(http.StatusOK, u)
+	return OKRequestWith(c, u)
+}
+
+func userLogin(c echo.Context) error {
+	u := &common.User{}
+	if err := c.Bind(u); err != nil {
+		return err
+	}
+
+	if u.Email == "" || u.Name == "" {
+		return BadRequest(c, "email or name missing")
+	}
+
+	token, err := core.UserLogin(u.Email)
+	if err != nil {
+		return err
+	}
+	cookie := &http.Cookie{
+		Name:    "auth-token",
+		Value:   token,
+		Expires: time.Now().Add(time.Duration(60*60) * time.Second),
+	}
+	c.SetCookie(cookie)
+	return OKRequest(c)
 }

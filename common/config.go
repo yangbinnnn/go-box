@@ -15,8 +15,8 @@ type Config struct {
 	WebStatic     string `json:"webstatic"`
 	DocStatic     string `json:"docstatic"`
 	APIPrefix     string `json:"apiprefix"`
-	MongoURI      string `json:"mongouri"`
-	MongoName     string `json:"mongoname"`
+	MongoURL      string `json:"mongourl"`
+	RedistURL     string `json:"redisurl"`
 	FileStoreType string `json:"filestoretype"`
 	LocalFileHome string `json:"localfilehome"`
 }

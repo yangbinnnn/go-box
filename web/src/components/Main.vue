@@ -11,6 +11,8 @@
       Name: <input type="text" name="name" id="name" v-model="name">
       <br>
       <button v-on:click="register">注册</button>
+      <button v-on:click="login">登录</button>
+      <button v-on:click="info">个人信息</button>
     </div>
 
     <div class="userInfo">
@@ -27,6 +29,7 @@
 
 <script>
 import axios from 'axios'
+axios.defaults.baseURL = (process.env.NODE_ENV !== 'production') ? 'http://127.0.0.1:8000' : ''
 
 export default {
   data () {
@@ -57,17 +60,29 @@ export default {
         'name': this.name
       }).then(response => {
         this.consoleMsg = response.data
-        setTimeout(this.userInfo, 3, [this.email])
       }).catch(error => (
         this.consoleMsg = error.response.data
       ))
     },
-    userInfo (email) {
-      axios.get('/api/user/info?email=' + email)
+    login (email) {
+      axios.post('/api/user/login', {
+        'email': this.email,
+        'name': this.name
+      }).then(response => {
+        this.consoleMsg = response.data
+        setTimeout(this.info, 3)
+      }).catch(error => {
+        this.consoleMsg = error.response.data
+      })
+    },
+    info (email) {
+      axios.get('/api/user/info')
         .then(response => {
-          this.name = response.data.name
-          this.email = response.data.email
-          this.registerTime = response.data.registerTime
+          let user = response.data.user
+          this.name = user.name
+          this.email = user.email
+          this.registerTime = user.registerTime
+          this.consoleMsg = response.data
         })
         .catch(error => (
           this.consoleMsg = error.response.data
@@ -89,16 +104,13 @@ export default {
 </script>
 
 <style scoped>
-  .main {
-    width: 960px;
-    margin: 0 auto;
+  .user, .userInfo {
+    height: 120px;
+    background-color: gray;
   }
 
-  .user .userInfo {
-    width: 960px;
-    height: 480px;
-    background-color: gray;
-    border-width: 2px;
-    border-color: gray;
+  .console {
+    height: 120px;
+    border: solid black;
   }
 </style>

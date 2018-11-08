@@ -8,8 +8,8 @@
     "webstatic": "web/dist/static",
     "docstatic": "docs",
     "apiprefix": "/api",
-    "mongouri": "mongodb://db:27017/go-box",
-    "mongoname": "go-box",
+    "mongourl": "mongodb://mongo/go-box",
+    "redisurl": "redis://redis/0",
     "filestoretype": "local",
     "localfilehome": "/tmp"
 }

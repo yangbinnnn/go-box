@@ -17,6 +17,7 @@ require (
 	github.com/envoyproxy/go-control-plane v0.6.1 // indirect
 	github.com/fullstorydev/grpcurl v1.0.0 // indirect
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
+	github.com/go-redis/redis v6.14.2+incompatible
 	github.com/gogo/googleapis v1.1.0 // indirect
 	github.com/golang/lint v0.0.0-20181026193005-c67002cb31c3 // indirect
 	github.com/golang/protobuf v1.2.0

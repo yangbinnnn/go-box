@@ -4,6 +4,8 @@ import (
 	"errors"
 	"go-box/common"
 	"go-box/db"
+
+	"github.com/segmentio/ksuid"
 )
 
 var (
@@ -27,4 +29,13 @@ func UserInfo(email string) (*common.User, error) {
 	}
 
 	return u, nil
+}
+
+func UserLogin(email string) (token string, err error) {
+	token = ksuid.New().String()
+	err = db.AddUserToken(token, email, 60*60*24)
+	if err != nil {
+		return "", err
+	}
+	return token, nil
 }

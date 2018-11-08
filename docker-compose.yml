@@ -7,6 +7,9 @@ services:
     volumes:
       - ./config.example.json:/srv/config.json
     depends_on:
-      - db
-  db:
+      - mongo
+      - redis
+  mongo:
     image: "mongo:latest"
+  redis:
+    image: "redis:latest"

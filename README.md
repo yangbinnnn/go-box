@@ -20,6 +20,7 @@ common/            - 通用全局代码
 db/                - 数据库
 file/              - 文件存储
 micro/             - 微服务相关
+middleware/        - Echo 自定义中间件
 test/              - 测试目录
 web/               - 前端资源
 
@@ -58,6 +59,9 @@ control            - 帮助脚本
 
 - API接口定义
 > `api/api.go` 中注册路由，路由的具体函数需要按业务逻辑分散到`api/*.go` 多个文件中，如用户相关的接口使用`api/user.go`
+
+- Echo 自定义中间件
+> `middleware` 中自定义Echo 中间，示例`TokenAuth.go`
 
 - 工程入口
 > `main.go` 为整个工程的入口，主要负责初始化各个模块，建议不要在其中实现复杂的业务逻辑
@@ -104,11 +108,11 @@ docker run -p 8000:8000 -v $(pwd)/config.json:/srv/config.json go-box
 
 - [x] Dockerfile
 - [x] 数据库: mongodb
-- [ ] 数据库: redis
+- [x] 数据库: redis
 - [x] Websocket
 - [x] 小文件存储: 本地磁盘
 - [ ] 小文件存储: 对象存储
-- [ ] 接口权限验证
+- [x] Cookies Token Auth
 - [ ] 定时任务管理
 - [ ] micro - gRPC for inter-service communication
 - [ ] micro - Jaeger for request tracing

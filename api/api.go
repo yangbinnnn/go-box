@@ -9,6 +9,7 @@ import (
 	"github.com/labstack/gommon/log"
 
 	"go-box/common"
+	mymid "go-box/middleware"
 )
 
 var (
@@ -32,6 +33,7 @@ func InitApi() {
 	e.Logger.SetLevel(log.DEBUG)
 
 	// middlewares
+	mymid.InitMiddleware()
 	e.Use(middleware.RequestID())
 	e.Use(middleware.Recover())
 	e.Use(middleware.CORS())
@@ -60,7 +62,10 @@ func InitApi() {
 	// api user
 	user := srv.Group("/user")
 	user.POST("/register", userRegister)
-	user.GET("/info", userInfo)
+	user.POST("/login", userLogin)
+
+	// token auth
+	user.GET("/info", userInfo, mymid.TokenAuth.Process)
 
 	// api file
 	file := srv.Group("/file")
