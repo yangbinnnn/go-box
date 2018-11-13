@@ -6,7 +6,18 @@ import glob
 import time
 
 
-pkgs = ['api', 'common', 'core', 'file', 'db', 'test']
+pkgs = [
+    'api',
+    'common',
+    'core',
+    'file',
+    'db',
+    'test',
+    'middleware',
+    'micro',
+    'micro/test',
+    'micro/services/math',
+]
 
 # linux.amd64 only
 os.environ.update({
