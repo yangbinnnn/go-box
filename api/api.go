@@ -34,8 +34,8 @@ func InitApi() {
 
 	// middlewares
 	mymid.InitMiddleware()
+	e.Use(mymid.Recover())
 	e.Use(middleware.RequestID())
-	e.Use(middleware.Recover())
 	e.Use(middleware.CORS())
 	e.Use(middleware.LoggerWithConfig(logconfig))
 

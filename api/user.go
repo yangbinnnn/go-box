@@ -19,10 +19,7 @@ func userRegister(c echo.Context) error {
 		return BadRequest(c, "email or name missing")
 	}
 
-	if err := core.UserRegister(u.Email, u.Name); err != nil {
-		return BadRequest(c, err.Error())
-	}
-
+	core.UserRegister(u.Email, u.Name)
 	return OKRequest(c)
 }
 
@@ -32,10 +29,7 @@ func userInfo(c echo.Context) error {
 		return BadRequest(c, "user not login")
 	}
 
-	u, err := core.UserInfo(email)
-	if err != nil {
-		return BadRequest(c, err.Error())
-	}
+	u := core.UserInfo(email)
 	return OKRequestWith(c, u)
 }
 
@@ -49,10 +43,7 @@ func userLogin(c echo.Context) error {
 		return BadRequest(c, "email or name missing")
 	}
 
-	token, err := core.UserLogin(u.Email)
-	if err != nil {
-		return err
-	}
+	token := core.UserLogin(u.Email)
 	cookie := &http.Cookie{
 		Name:    "auth-token",
 		Value:   token,

@@ -9,7 +9,9 @@ import (
 )
 
 func OKRequest(c echo.Context) error {
-	return c.JSON(http.StatusOK, nil)
+	return c.JSON(http.StatusOK, map[string]string{
+		"stat": "OK",
+	})
 }
 
 func OKRequestWith(c echo.Context, o interface{}) error {
