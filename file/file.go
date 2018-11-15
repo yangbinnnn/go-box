@@ -17,13 +17,13 @@ var (
 
 func InitFile() {
 	config := common.GlobalConfig
-	switch config.FileStoreType {
+	switch config.File.Type {
 	case "local":
-		FileStore = NewLocal(config.LocalFileHome)
+		FileStore = NewLocal(config.File.Home)
 		break
 	case "s3":
 		break
 	default:
-		FileStore = NewLocal(config.LocalFileHome)
+		FileStore = NewLocal(config.File.Home)
 	}
 }

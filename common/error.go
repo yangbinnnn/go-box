@@ -47,9 +47,30 @@ func CheckError(err error) {
 	panic(unkown)
 }
 
-func Verify(exp bool, stat ReqStat) {
+func CheckErrorWithIgnore(err error, ignore ...error) {
+	if err == nil {
+		return
+	}
+
+	for _, ie := range ignore {
+		if err == ie {
+			return
+		}
+	}
+
+	unkown := NewReqStat("ERR_SERVER_EXCEPTION", err.Error(), http.StatusInternalServerError)
+	panic(unkown)
+}
+
+func Verify(exp bool, err error) {
 	if !exp {
 		return
 	}
-	panic(stat)
+
+	if _, ok := err.(ReqStat); ok {
+		panic(err)
+	}
+
+	unkown := NewReqStat("ERR_SERVER_EXCEPTION", err.Error(), http.StatusInternalServerError)
+	panic(unkown)
 }

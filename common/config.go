@@ -6,19 +6,21 @@ import (
 )
 
 type Config struct {
-	Debug         bool   `json:"debug"`
-	LogPath       string `json:"logpath"`
-	HTTPAddr      string `json:"httpaddr"`
-	GrpcAddr      string `json:"grpcaddr"`
-	GrpcEnable    bool   `json:"grpcenable"`
-	WebIndex      string `json:"webindex"`
-	WebStatic     string `json:"webstatic"`
-	DocStatic     string `json:"docstatic"`
-	APIPrefix     string `json:"apiprefix"`
-	MongoURL      string `json:"mongourl"`
-	RedistURL     string `json:"redisurl"`
-	FileStoreType string `json:"filestoretype"`
-	LocalFileHome string `json:"localfilehome"`
+	Debug      bool   `json:"debug"`
+	LogPath    string `json:"logpath"`
+	HTTPAddr   string `json:"httpaddr"`
+	GrpcAddr   string `json:"grpcaddr"`
+	GrpcEnable bool   `json:"grpcenable"`
+	WebIndex   string `json:"webindex"`
+	WebStatic  string `json:"webstatic"`
+	DocStatic  string `json:"docstatic"`
+	APIPrefix  string `json:"apiprefix"`
+	MongoURL   string `json:"mongourl"`
+	RedisURL   string `json:"redisurl"`
+	File       struct {
+		Type string `json:"type"`
+		Home string `json:"home"`
+	} `json:"file"`
 }
 
 var GlobalConfig *Config

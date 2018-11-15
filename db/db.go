@@ -39,7 +39,7 @@ func initMGO() {
 
 func initRedis() {
 	config := common.GlobalConfig
-	opts, err := redis.ParseURL(config.RedistURL)
+	opts, err := redis.ParseURL(config.RedisURL)
 	if err != nil {
 		panic(err)
 	}

@@ -10,6 +10,8 @@
     "apiprefix": "/api",
     "mongourl": "mongodb://mongo/go-box",
     "redisurl": "redis://redis/0",
-    "filestoretype": "local",
-    "localfilehome": "/tmp"
+    "file": {
+        "type": "local",
+        "home": "/tmp"
+    }
 }
