@@ -35,6 +35,17 @@ ldflags = " ".join([
     '-X main.BuildGitHash=%s' % head
 ])
 
+_GREEN = "\033[92m"
+_RED = "\033[91m"
+_BOLD = '\033[1m'
+_ENDC = '\033[0m'
+
+def _red_text(txt):
+    return "%s%s%s%s" % (_BOLD, _RED, txt, _ENDC)
+
+def _green_text(txt):
+    return "%s%s%s%s" % (_BOLD, _GREEN, txt, _ENDC)
+
 def _get_mod():
     pwd = os.getcwd()
     gopath = os.environ.get('GOPATH', '')
@@ -74,7 +85,10 @@ def _sed(path, old, new):
 def _run(cmd):
     print 'running: %s' % cmd
     code = os.system(cmd)
-    print 'finish: %s' % code
+    if code != 0:
+        print _red_text('run: %s failed' % cmd)
+    else:
+        print _green_text('run: %s success' % cmd)
 
 
 def version():
