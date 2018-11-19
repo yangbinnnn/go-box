@@ -35,10 +35,6 @@ var (
 	ErrUserNotFound      = NewReqStat("ERR_USER_NOT_FOUND", "用户不存在")
 )
 
-func Recover() {
-
-}
-
 func CheckError(err error) {
 	if err == nil {
 		return

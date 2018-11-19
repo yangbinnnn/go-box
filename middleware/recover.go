@@ -61,16 +61,15 @@ func RecoverWithConfig(config RecoverConfig) echo.MiddlewareFunc {
 					default:
 						err = fmt.Errorf("%v", r)
 					}
-					stack := make([]byte, config.StackSize)
-					length := runtime.Stack(stack, !config.DisableStackAll)
-					if !config.DisablePrintStack {
-						c.Logger().Printf("[%s] %s %s\n", color.Red("PANIC RECOVER"), err, stack[:length])
-					}
-
 					// wrapper app error
 					if appError, ok := err.(common.ReqStat); ok {
 						c.JSON(appError.HttpStatusCode, appError)
 					} else {
+						stack := make([]byte, config.StackSize)
+						length := runtime.Stack(stack, !config.DisableStackAll)
+						if !config.DisablePrintStack {
+							c.Logger().Printf("[%s] %s %s\n", color.Red("PANIC RECOVER"), err, stack[:length])
+						}
 						c.Error(err)
 					}
 				}

@@ -47,5 +47,5 @@ func initRedis() {
 }
 
 func initTable() {
-	UserTable = MgoDB.C("User")
+	userTable = MgoDB.C("User")
 }
