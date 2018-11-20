@@ -53,6 +53,14 @@ func InitApi() {
 
 	// api
 	srv := e.Group(config.APIPrefix)
+	if config.Debug {
+		// record the json request/response for debug
+		jsonBodyConfig := middleware.BodyDumpConfig{
+			Skipper: mymid.JsonBodySkipper,
+			Handler: mymid.JsonBodyHandler,
+		}
+		srv.Use(middleware.BodyDumpWithConfig(jsonBodyConfig))
+	}
 	srv.GET("/ping", ping)
 
 	// api math
