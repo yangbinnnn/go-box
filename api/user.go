@@ -28,7 +28,6 @@ func userInfo(c echo.Context) error {
 	if email == "" {
 		return BadRequest(c, "user not login")
 	}
-
 	u := core.UserInfo(email)
 	return OKRequestWith(c, u)
 }

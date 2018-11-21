@@ -1,8 +1,10 @@
 package api
 
 import (
+	"go-box/common"
 	"net/http"
 	"reflect"
+	"strconv"
 	"strings"
 
 	"github.com/labstack/echo"
@@ -34,4 +36,18 @@ func BadRequest(c echo.Context, message string) error {
 		"message": message,
 	}
 	return c.JSON(http.StatusBadRequest, m)
+}
+
+func QueryParamMustInt(c echo.Context, name string) int64 {
+	value := c.QueryParam(name)
+	common.Verify(value == "", common.ErrBadParams)
+	valueInt, err := strconv.ParseInt(value, 10, 64)
+	common.Verify(err != nil, common.ErrBadParams)
+	return valueInt
+}
+
+func QueryParamMustString(c echo.Context, name string) string {
+	value := c.QueryParam(name)
+	common.Verify(value == "", common.ErrBadParams)
+	return value
 }
